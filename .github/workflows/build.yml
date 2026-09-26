@@ -1,34 +1,34 @@
-名称: 将 Python 构建为 EXE 文件
+name: Build Python to EXE
 
-触发条件:
-推送:
-分支: [ main ]
- workflow_dispatch:
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - 名称: 检出代码库
-        使用: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - 名称: 设置 Python 环境
-        使用: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python版本: '3.10'
+          python-version: '3.10'
 
-      - 名称: 安装依赖
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pyinstaller
 
-      - 名称: 构建EXE
+      - name: Build EXE
         run: |
           pyinstaller --onefile project/anzhuo/main.py --name BirthdayApp
 
-      - 名称: 上传构建产物
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          名称: BirthdayApp
-          路径: dist/BirthdayApp.exe
+          name: BirthdayApp
+          path: dist/BirthdayApp.exe
