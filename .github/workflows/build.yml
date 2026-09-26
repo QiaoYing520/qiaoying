@@ -1,9 +1,9 @@
-name: Build Python to EXE
+名称: 将 Python 构建为 EXE 文件
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+触发条件:
+推送:
+分支: [ main ]
+ workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         run: |
           pyinstaller --onefile project/anzhuo/main.py --name BirthdayApp
 
-      - name: 上传构建产物
+      - 名称: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
           名称: BirthdayApp
